@@ -1,12 +1,31 @@
+name: Schedule and trigger actions
+
 on:
   schedule:
     - cron: '*/5 * * * *'
+  # Enables manual trigger from GitHub UI
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: "Why are you running this manually?"
+        required: false
+        default: "Manual trigger"
+
   
 jobs:
-  test_schedule:
-    name: test of schedule
+  write_time:
+    name: write time
     runs-on: ubuntu-latest
     steps:
+
+      - name: Only for manual runs
+        if: github.event_name == 'workflow_dispatch'
+        run: echo "Manual run detected"
+    
+      - name: Only for cron runs
+        if: github.event_name == 'schedule'
+        run: echo "Scheduled run detected"
+    
       - name: Every five minute
         # if: github.event.schedule != '30 5 * * 1,3'
         run: echo "This step will be run every 5 minute git status. The current server time is $(date)"
