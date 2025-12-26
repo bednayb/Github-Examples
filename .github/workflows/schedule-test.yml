@@ -10,7 +10,6 @@ on:
         description: "Why are you running this manually?"
         required: false
         default: "Manual trigger"
-
   
 jobs:
   write_time:
@@ -20,7 +19,9 @@ jobs:
 
       - name: Only for manual runs
         if: github.event_name == 'workflow_dispatch'
-        run: echo "Manual run detected"
+        run:  | 
+          echo "Manual run detected."
+          echo "Reason: ${{ github.event.inputs.reason || 'No reason' }}"
     
       - name: Only for cron runs
         if: github.event_name == 'schedule'
