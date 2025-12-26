@@ -1,0 +1,13 @@
+name: Write branch name
+
+on: 
+    workflow_dispatch:
+    
+jobs:
+    write_the_branch_name:
+        name: Write the branch name
+        runs-on: ubuntu-latest
+        steps:
+            - name: Log branch name
+              run: |
+                echo "Branch name: ${{ github.ref_name }}"

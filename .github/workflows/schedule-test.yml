@@ -28,13 +28,14 @@ jobs:
           echo "Manual run detected."
           echo "Reason: ${{ github.event.inputs.reason || 'No reason' }}"
       
-      - name: Mode = boldog karacsonyt
-        if: github.event.inputs.mode == 'boldog karacsonyt'
-        run: echo "Vege van kicsi"
-      
-      - name: Mode != boldog karacsonyt
-        if: github.event_name == 'workflow_dispatch' && github.event.inputs.mode != 'boldog karacsonyt'
-        run: echo "Ki az a Zsolti bacsi?"
+      - name: Mode check (manual only)
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          if [ "${{ github.event.inputs.mode }}" = "boldog karacsonyt" ]; then
+            echo "Vege van kicsi"
+          else
+            echo "Ki az a Zsolti bacsi?"
+          fi
     
       - name: Only for cron runs
         if: github.event_name == 'schedule'
