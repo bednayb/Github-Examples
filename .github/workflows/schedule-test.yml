@@ -6,10 +6,15 @@ on:
   # Enables manual trigger from GitHub UI
   workflow_dispatch:
     inputs:
-      reason:
+      mode:
         description: "Why are you running this manually?"
-        required: false
-        default: "Manual trigger"
+        type: choice
+        options:
+          - check time
+          - why not
+          - boldog karacsonyt
+        required: true
+        default: "boldog karacsonyt"
   
 jobs:
   write_time:
@@ -22,11 +27,18 @@ jobs:
         run:  | 
           echo "Manual run detected."
           echo "Reason: ${{ github.event.inputs.reason || 'No reason' }}"
+      
+      - name: Mode = boldog karacsonyt
+        if: github.event.inputs.mode == 'boldog karacsonyt'
+        run: echo "Vege van kicsi"
+      
+      - name: Mode != boldog karacsonyt
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.mode != 'boldog karacsonyt'
+        run: echo "Ki az a Zsolti bacsi?"
     
       - name: Only for cron runs
         if: github.event_name == 'schedule'
         run: echo "Scheduled run detected"
     
       - name: Every five minute
-        # if: github.event.schedule != '30 5 * * 1,3'
         run: echo "This step will be run every 5 minute git status. The current server time is $(date)"
