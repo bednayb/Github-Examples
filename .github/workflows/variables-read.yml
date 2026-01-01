@@ -1,0 +1,32 @@
+name: Variables reading
+
+on: 
+    workflow_dispatch:
+        inputs:
+            mode:
+                description: "Which variable do you wanna read?"
+                type: choice
+                options:
+                    - env
+                    - secret
+                required: true
+                default: "env"
+jobs:
+    read_variables:
+        name: read variables
+        runs-on: ubuntu-latest
+        steps:
+            - name: read env variables
+              if: github.event.inputs.mode == 'env'
+              run: | 
+                echo ' my baby name is ${{ env.BABY }}'
+    read_secrets:
+        name: read secrets
+        runs-on: ubuntu-latest
+        steps:
+            - name: read env secrets
+              if: github.event.inputs.mode == 'secret'
+              run: |
+                echo ' my dog name is ${{ secrets.DOG }}'
+                
+        
