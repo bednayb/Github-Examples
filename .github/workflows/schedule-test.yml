@@ -26,6 +26,7 @@ jobs:
         if: github.event_name == 'workflow_dispatch'
         run:  | 
           echo "Manual run detected."
+          echo "the actor is $MY_ACTOR"
           echo "Reason: ${{ github.event.inputs.reason || 'No reason' }}"
       
       - name: Mode check (manual only)
