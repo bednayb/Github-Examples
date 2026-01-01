@@ -12,6 +12,13 @@ on:
                 required: true
                 default: "env"
 jobs:
+    check_variables:
+        name: check variables
+        runs-on: ubuntu-latest
+        steps:
+            - name: check variables
+              run: env | sort
+              
     read_variables:
         name: read variables
         runs-on: ubuntu-latest
@@ -20,6 +27,7 @@ jobs:
               if: github.event.inputs.mode == 'env'
               run: | 
                 echo "my baby name is ${{ env.BABY }}"
+     
     read_secrets:
         name: read secrets
         runs-on: ubuntu-latest
