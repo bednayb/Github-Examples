@@ -19,7 +19,7 @@ jobs:
             - name: read env variables
               if: github.event.inputs.mode == 'env'
               run: | 
-                echo ' my baby name is ${{ env.BABY }}'
+                echo "my baby name is ${{ env.BABY }}"
     read_secrets:
         name: read secrets
         runs-on: ubuntu-latest
