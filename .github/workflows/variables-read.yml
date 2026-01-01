@@ -38,7 +38,7 @@ jobs:
                 echo ' my dog name is ${{ secrets.DOG }}'
     write_need_variables_run:
         name: check needs
-        runs-on: latest-ubuntu
+        runs-on: ubuntu-latest
         needs: [read_variables]
         steps:
             - name: console success
