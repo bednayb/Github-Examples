@@ -35,7 +35,9 @@ jobs:
             - name: read env secrets
               if: github.event.inputs.mode == 'secret'
               run: |
-                echo ' my dog name is ${{ secrets.DOG }}'
+                echo ' my dog name is ${{ env.ENV_DOG }}'
+              env:
+                ENV_DOG: ${{ secrets.DOG }}
     write_need_variables_run:
         name: check needs
         runs-on: ubuntu-latest
