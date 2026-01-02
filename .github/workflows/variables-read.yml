@@ -28,11 +28,11 @@ jobs:
             - name: 'print actor'
               if: github.event.inputs.print_env == 'actor'
               run: | 
-                echo 'actor: $GITHUB_ACTOR'
+                echo "actor: $GITHUB_ACTOR"
             - name: 'print action'
               if: github.event.inputs.print_env == 'action'
               run: | 
-                echo 'actor: $GITHUB_ACTION'
+                echo "actor: $GITHUB_ACTION"
                 
     check_variables:
         name: check variables
