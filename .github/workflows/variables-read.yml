@@ -32,7 +32,7 @@ jobs:
             - name: 'print action'
               if: github.event.inputs.print_env == 'action'
               run: | 
-                echo "actor: $GITHUB_ACTION"
+                echo "action: $GITHUB_ACTION"
                 
     check_variables:
         name: check variables
