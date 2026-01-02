@@ -11,7 +11,29 @@ on:
                     - secret
                 required: true
                 default: "env"
+            print_env:
+                description: 'github env'
+                type: choice
+                options:
+                    - actor
+                    - action
+                required: true
+                default: "actor"
 jobs:
+
+    print_an_env:
+        name: print an env
+        runs-on: ubuntu-latest
+        steps:
+            - name: 'print actor'
+              if: github.event.inputs.print_env == 'actor'
+              run: | 
+                echo 'actor: $GITHUB_ACTOR"
+            - name: 'print action'
+              if: github.event.inputs.print_env == 'action'
+              run: | 
+                echo 'actor: $GITHUB_ACTION"
+                
     check_variables:
         name: check variables
         runs-on: ubuntu-latest
