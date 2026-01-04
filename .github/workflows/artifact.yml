@@ -1,0 +1,29 @@
+name: Artifact
+
+on:
+  workflow_dispatch:
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate file
+        run: echo "hello" > message.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: message
+          path: message.txt
+
+  consume:
+    needs: generate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: message
+
+      - name: Read file
+        run: cat message.txt
