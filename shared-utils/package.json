@@ -1,9 +1,0 @@
-{
-    "name": "@my-org/shared-utils",
-    "version": "1.0.0",
-    "main": "index.js",
-    "publishConfig": {
-      "registry": "https://npm.pkg.github.com"
-    }
-  }
-  
