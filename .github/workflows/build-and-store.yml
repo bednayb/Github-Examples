@@ -37,3 +37,13 @@ jobs:
         with:
           name: app-dist-${{ github.event.inputs.environment }}
           path: dist
+      - name: Verify artifact
+        run: |
+          ls -la dist
+      - name: Trigger Repo B workflow to read artifact
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          repository: bednayb/gitActions
+          event-type: read-repo-a-artifact
+          client-payload: '{"env": "${{ github.event.inputs.environment }}"}'
