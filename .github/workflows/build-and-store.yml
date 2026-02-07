@@ -43,7 +43,7 @@ jobs:
         run: |
           ls -la dist
       - name: Trigger Repo B workflow to read artifact
-        uses: peter-evans/repository-dispatch@v2
+        uses: peter-evans/repository-dispatch@v4
         with:
           token: ${{ secrets.PAT_TOKEN }}
           repository: bednayb/gitActions
