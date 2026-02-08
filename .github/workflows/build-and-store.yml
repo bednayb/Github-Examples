@@ -41,7 +41,19 @@ jobs:
           path: dist
       - name: Verify artifact
         run: |
-          ls -la dist
+          ls -la 
+      - name: Check if secret is empty
+        run: |
+          if [ -z "${{ secrets.PAT_TOKEN }}" ]; then
+            echo "A token ures!"
+            exit 1
+          else
+            echo "A token be van allitva."
+          fi
+      - name: Check if Repo B exists via API
+        run: |
+          curl -H "Authorization: token ${{ secrets.PAT_TOKEN }}" \
+               -I https://api.github.com/repos/bednayb/gitActions
       - name: Trigger Repo B workflow to read artifact
         uses: peter-evans/repository-dispatch@v4
         with:
